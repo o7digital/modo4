@@ -1966,14 +1966,14 @@ td:first-child {
   }
 
   .hero-media {
-    background-position: center center;
+    background-position: 58% center;
     transform: none;
   }
 
   .hero-overlay {
     background:
-      linear-gradient(180deg, rgba(4, 12, 24, 0.68), rgba(4, 12, 24, 0.85) 56%, rgba(4, 12, 24, 0.97)),
-      linear-gradient(90deg, rgba(4, 12, 24, 0.86), transparent);
+      linear-gradient(180deg, rgba(4, 12, 24, 0.34) 0%, rgba(4, 12, 24, 0.5) 42%, rgba(4, 12, 24, 0.82) 100%),
+      linear-gradient(90deg, rgba(4, 12, 24, 0.66) 0%, rgba(4, 12, 24, 0.34) 52%, rgba(4, 12, 24, 0.12) 100%);
   }
 
   .hero-content {
