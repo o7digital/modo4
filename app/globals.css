@@ -113,6 +113,32 @@ a {
   gap: 10px;
 }
 
+.language-toggle {
+  display: inline-flex;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 9px;
+  background: rgba(7, 17, 31, 0.42);
+  padding: 3px;
+  backdrop-filter: blur(12px);
+}
+
+.language-toggle button {
+  min-width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.language-toggle button.active {
+  background: rgba(44, 110, 255, 0.9);
+  color: white;
+}
+
 .admin-trigger,
 .menu-trigger {
   display: inline-flex;
@@ -535,6 +561,7 @@ a {
 
 .stay-toggle {
   display: flex;
+  flex-wrap: nowrap;
   margin-left: auto;
   border: 1px solid #d7dce5;
   border-radius: 10px;
@@ -1048,7 +1075,7 @@ footer button {
 
 .drawer-toggle {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 7px;
   margin-top: 9px;
   border-radius: 10px;
@@ -1765,6 +1792,14 @@ td:first-child {
     font-size: 17px;
   }
 
+  .header-actions {
+    gap: 8px;
+  }
+
+  .language-toggle button {
+    min-width: 31px;
+  }
+
   .main-nav {
     position: absolute;
     top: 72px;
@@ -1931,7 +1966,8 @@ td:first-child {
   }
 
   .hero-media {
-    background-position: 62% center;
+    background-position: center center;
+    transform: none;
   }
 
   .hero-overlay {
@@ -1989,6 +2025,7 @@ td:first-child {
   }
 
   .filter-row {
+    display: flex;
     overflow-x: auto;
     padding-bottom: 12px;
   }
@@ -2001,6 +2038,14 @@ td:first-child {
   .stay-toggle {
     flex: 0 0 auto;
     margin-left: 0;
+  }
+
+  .stay-toggle button {
+    white-space: nowrap;
+  }
+
+  .drawer-toggle {
+    grid-template-columns: 1fr;
   }
 
   .property-image {

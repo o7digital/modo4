@@ -38,13 +38,14 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 
+type Language = "es" | "en";
 type Zone =
   | "Todas"
   | "Xola"
   | "Colones de Echegaray, Edo Mex"
   | "Condesa"
   | "Colonia del Valle";
-type StayType = "Largo plazo" | "Por evento";
+type StayType = "Estancia larga" | "Estancia corta" | "Por evento";
 
 type Property = {
   id: number;
@@ -218,6 +219,179 @@ const reservations = [
   },
 ];
 
+const copy = {
+  es: {
+    all: "Todas",
+    navProperties: "Propiedades",
+    navStays: "Estancias",
+    navServices: "Servicios",
+    navAbout: "Nosotros",
+    menuOpen: "Abrir menú",
+    menuClose: "Cerrar menú",
+    adminAria: "Abrir backend de administración",
+    heroEyebrow: "Vive. Trabaja. Quédate.",
+    heroTitleA: "Vive, trabaja",
+    heroTitleB: "entre CDMX y Edo Mex",
+    heroSubtitle:
+      "Rentas flexibles de habitaciones, departamentos y oficinas en tres zonas de CDMX y una ubicación en Edo Mex.",
+    explore: "Explorar propiedades",
+    eventCta: "Ver estancias por evento",
+    zonesAvailable: "Zonas disponibles",
+    zone: "Zona",
+    stayType: "Tipo de estancia",
+    dates: "Fechas",
+    searchDatesFlexible: "Fechas flexibles",
+    searchDatesSelect: "Seleccionar fechas",
+    searchAvailability: "Buscar disponibilidad",
+    zoneKicker: "CUATRO FORMAS DE HABITAR LA CIUDAD",
+    propertyKicker: "ESPACIOS SELECCIONADOS",
+    propertyTitle: "Encuentra tu próximo espacio",
+    propertyIntro:
+      "Elige una estancia larga, una estancia corta o reserva por evento para una producción, reunión o visita.",
+    filterAria: "Filtrar por zona",
+    longStay: "Estancia larga",
+    shortStay: "Estancia corta",
+    eventStay: "Por evento",
+    save: "Guardar",
+    from: "Desde",
+    reserve: "Reservar",
+    flexibilityKicker: "FLEXIBILIDAD REAL",
+    flexibilityTitle: "Un espacio para cada momento",
+    flexibilityIntro:
+      "Desde una habitación por varios meses hasta una oficina por un lanzamiento: paga solo por el tiempo y los servicios que necesitas.",
+    longCardTitle: "Estancia larga",
+    longCardText:
+      "Contratos claros, servicios opcionales y atención durante toda tu estancia.",
+    shortCardTitle: "Estancia corta",
+    shortCardText:
+      "Días flexibles para visitas, equipos temporales o transiciones en la ciudad.",
+    eventCardTitle: "Por evento",
+    eventCardText:
+      "Espacios listos para reuniones, producciones, lanzamientos o eventos especiales.",
+    servicesKicker: "SERVICIOS A LA CARTA",
+    servicesTitle: "Tu tiempo vale más",
+    servicesIntro:
+      "Personaliza tu estancia y agrega servicios cuando los necesites. El cargo aparece directamente en tu cuenta.",
+    buildStay: "Armar mi estancia",
+    closingTitleA: "Menos complicaciones.",
+    closingTitleB: "Más ciudad.",
+    closingText:
+      "Administramos espacios cuidados, conectados y listos para vivir o trabajar. Tú eliges dónde, cuánto tiempo y qué necesitas.",
+    availability: "Consultar disponibilidad",
+    exploreFooter: "Explora",
+    zonesFooter: "Zonas",
+    contact: "Contacto",
+    whatsapp: "Contactar por WhatsApp",
+    copyright: "© 2026 MODO4. Mockup conceptual.",
+    bookingKicker: "RESERVA FLEXIBLE",
+    bookingTitle: "Configura tu estancia",
+    close: "Cerrar",
+    closeBooking: "Cerrar reserva",
+    mode: "MODALIDAD",
+    start: "Entrada",
+    end: "Salida",
+    extras: "SERVICIOS EXTRA",
+    add: "Agregar",
+    remove: "Quitar",
+    firstMonth: "Primer mes",
+    estimatedStay: "Estancia estimada",
+    day: "día",
+    days: "días",
+    extraServices: "Servicios extra",
+    total: "Total estimado",
+    requestBooking: "Solicitar reserva",
+    noCharge: "No se realizará ningún cargo hasta confirmar disponibilidad.",
+    toast: "Solicitud guardada. Nuestro equipo te contactará en breve.",
+    selectedAlt: "de MODO4 en",
+    backend: "Backend",
+  },
+  en: {
+    all: "All",
+    navProperties: "Properties",
+    navStays: "Stays",
+    navServices: "Services",
+    navAbout: "About",
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
+    adminAria: "Open admin backend",
+    heroEyebrow: "Live. Work. Stay.",
+    heroTitleA: "Live, work",
+    heroTitleB: "between CDMX and Edo Mex",
+    heroSubtitle:
+      "Flexible room, apartment and office rentals across three CDMX neighborhoods and one Edo Mex location.",
+    explore: "Explore properties",
+    eventCta: "View event stays",
+    zonesAvailable: "Available zones",
+    zone: "Zone",
+    stayType: "Stay type",
+    dates: "Dates",
+    searchDatesFlexible: "Flexible dates",
+    searchDatesSelect: "Select dates",
+    searchAvailability: "Search availability",
+    zoneKicker: "FOUR WAYS TO LIVE THE CITY",
+    propertyKicker: "SELECTED SPACES",
+    propertyTitle: "Find your next space",
+    propertyIntro:
+      "Choose a long stay, a short stay, or book by event for a production, meeting or visit.",
+    filterAria: "Filter by zone",
+    longStay: "Long stay",
+    shortStay: "Short stay",
+    eventStay: "By event",
+    save: "Save",
+    from: "From",
+    reserve: "Book",
+    flexibilityKicker: "REAL FLEXIBILITY",
+    flexibilityTitle: "A space for every moment",
+    flexibilityIntro:
+      "From a room for several months to an office for a launch: pay only for the time and services you need.",
+    longCardTitle: "Long stay",
+    longCardText:
+      "Clear agreements, optional services and support throughout your stay.",
+    shortCardTitle: "Short stay",
+    shortCardText:
+      "Flexible days for visits, temporary teams or transitions in the city.",
+    eventCardTitle: "By event",
+    eventCardText:
+      "Ready-to-use spaces for meetings, productions, launches or special events.",
+    servicesKicker: "A LA CARTE SERVICES",
+    servicesTitle: "Your time is worth more",
+    servicesIntro:
+      "Customize your stay and add services when you need them. Charges appear directly in your account.",
+    buildStay: "Build my stay",
+    closingTitleA: "Less friction.",
+    closingTitleB: "More city.",
+    closingText:
+      "We manage curated, connected spaces ready to live or work in. You choose where, how long and what you need.",
+    availability: "Check availability",
+    exploreFooter: "Explore",
+    zonesFooter: "Zones",
+    contact: "Contact",
+    whatsapp: "Contact via WhatsApp",
+    copyright: "© 2026 MODO4. Concept mockup.",
+    bookingKicker: "FLEXIBLE BOOKING",
+    bookingTitle: "Configure your stay",
+    close: "Close",
+    closeBooking: "Close booking",
+    mode: "MODE",
+    start: "Check-in",
+    end: "Check-out",
+    extras: "EXTRA SERVICES",
+    add: "Add",
+    remove: "Remove",
+    firstMonth: "First month",
+    estimatedStay: "Estimated stay",
+    day: "day",
+    days: "days",
+    extraServices: "Extra services",
+    total: "Estimated total",
+    requestBooking: "Request booking",
+    noCharge: "No charge will be made until availability is confirmed.",
+    toast: "Request saved. Our team will contact you shortly.",
+    selectedAlt: "by MODO4 in",
+    backend: "Backend",
+  },
+} as const;
+
 function formatMoney(value: number) {
   return new Intl.NumberFormat("es-MX", {
     style: "currency",
@@ -227,8 +401,18 @@ function formatMoney(value: number) {
 }
 
 export default function HomePage() {
+  return <Modo4Page initialLanguage="es" />;
+}
+
+export function Modo4Page({
+  initialLanguage = "es",
+}: {
+  initialLanguage?: Language;
+}) {
+  const [language, setLanguage] = useState<Language>(initialLanguage);
+  const t = copy[language];
   const [selectedZone, setSelectedZone] = useState<Zone>("Todas");
-  const [stayType, setStayType] = useState<StayType>("Largo plazo");
+  const [stayType, setStayType] = useState<StayType>("Estancia larga");
   const [bookingOpen, setBookingOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -261,7 +445,7 @@ export default function HomePage() {
   );
 
   const basePrice =
-    stayType === "Largo plazo"
+    stayType === "Estancia larga"
       ? selectedProperty.monthlyPrice
       : selectedProperty.eventPrice * dayCount;
 
@@ -280,7 +464,7 @@ export default function HomePage() {
 
   function confirmBooking() {
     setBookingOpen(false);
-    setToast("Solicitud guardada. Nuestro equipo te contactará en breve.");
+    setToast(t.toast);
     window.setTimeout(() => setToast(""), 3800);
   }
 
@@ -296,37 +480,53 @@ export default function HomePage() {
         </a>
         <nav className={menuOpen ? "main-nav is-open" : "main-nav"}>
           <a href="#propiedades" onClick={() => setMenuOpen(false)}>
-            Propiedades
+            {t.navProperties}
           </a>
           <a href="#estancias" onClick={() => setMenuOpen(false)}>
-            Estancias
+            {t.navStays}
           </a>
           <a href="#servicios" onClick={() => setMenuOpen(false)}>
-            Servicios
+            {t.navServices}
           </a>
           <a href="#nosotros" onClick={() => setMenuOpen(false)}>
-            Nosotros
+            {t.navAbout}
           </a>
           <button
             className="nav-admin-mobile"
             onClick={() => setAdminOpen(true)}
           >
-            Backend
+            {t.backend}
           </button>
         </nav>
         <div className="header-actions">
+          <div className="language-toggle" aria-label="Language">
+            <button
+              className={language === "es" ? "active" : ""}
+              onClick={() => setLanguage("es")}
+              aria-pressed={language === "es"}
+            >
+              ES
+            </button>
+            <button
+              className={language === "en" ? "active" : ""}
+              onClick={() => setLanguage("en")}
+              aria-pressed={language === "en"}
+            >
+              EN
+            </button>
+          </div>
           <button
             className="admin-trigger"
             onClick={() => setAdminOpen(true)}
-            aria-label="Abrir backend de administración"
+            aria-label={t.adminAria}
           >
             <LayoutDashboard size={18} />
-            <span>Backend</span>
+            <span>{t.backend}</span>
           </button>
           <button
             className="menu-trigger"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Abrir menú"
+            aria-label={menuOpen ? t.menuClose : t.menuOpen}
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -340,19 +540,18 @@ export default function HomePage() {
           <p className="eyebrow">
             <span>MODO4</span>
             <i />
-            Vive. Trabaja. Quédate.
+            {t.heroEyebrow}
           </p>
           <h1>
-            Vive, trabaja
-            <br />entre CDMX y Edo Mex
+            {t.heroTitleA}
+            <br />{t.heroTitleB}
           </h1>
           <p className="hero-subtitle">
-            Rentas flexibles de habitaciones, departamentos y oficinas en
-            tres zonas de CDMX y una ubicación en Edo Mex.
+            {t.heroSubtitle}
           </p>
           <div className="hero-actions">
             <a className="button button-primary" href="#propiedades">
-              Explorar propiedades <ArrowRight size={18} />
+              {t.explore} <ArrowRight size={18} />
             </a>
             <button
               className="button button-glass"
@@ -361,12 +560,12 @@ export default function HomePage() {
                 setBookingOpen(true);
               }}
             >
-              Ver estancias por evento
+              {t.eventCta}
             </button>
           </div>
         </div>
 
-        <div className="zone-pills" aria-label="Zonas disponibles">
+        <div className="zone-pills" aria-label={t.zonesAvailable}>
           {zoneDetails.map((zone) => (
             <button
               key={zone.short}
@@ -385,13 +584,13 @@ export default function HomePage() {
 
         <div className="search-panel">
           <label>
-            <span>Zona</span>
+            <span>{t.zone}</span>
             <select
-              aria-label="Filtrar por zona"
+              aria-label={t.filterAria}
               value={selectedZone}
               onChange={(event) => setSelectedZone(event.target.value as Zone)}
             >
-              <option>Todas</option>
+              <option value="Todas">{t.all}</option>
               <option>Xola</option>
               <option>Colones de Echegaray, Edo Mex</option>
               <option>Condesa</option>
@@ -400,31 +599,34 @@ export default function HomePage() {
             <ChevronDown size={18} />
           </label>
           <label>
-            <span>Tipo de estancia</span>
+            <span>{t.stayType}</span>
             <select
-              aria-label="Elegir tipo de estancia"
+              aria-label={t.stayType}
               value={stayType}
               onChange={(event) => setStayType(event.target.value as StayType)}
             >
-              <option>Largo plazo</option>
-              <option>Por evento</option>
+              <option value="Estancia larga">{t.longStay}</option>
+              <option value="Estancia corta">{t.shortStay}</option>
+              <option value="Por evento">{t.eventStay}</option>
             </select>
             <ChevronDown size={18} />
           </label>
           <label>
-            <span>Fechas</span>
+            <span>{t.dates}</span>
             <button
               className="date-value"
-              aria-label="Abrir selección de fechas"
+              aria-label={t.searchDatesSelect}
               onClick={() => setBookingOpen(true)}
             >
-              {stayType === "Largo plazo" ? "Fechas flexibles" : "Seleccionar fechas"}
+              {stayType === "Estancia larga"
+                ? t.searchDatesFlexible
+                : t.searchDatesSelect}
             </button>
             <CalendarDays size={18} />
           </label>
           <button
             className="search-submit"
-            aria-label="Buscar disponibilidad"
+            aria-label={t.searchAvailability}
             onClick={() =>
               document
                 .getElementById("propiedades")
@@ -437,7 +639,7 @@ export default function HomePage() {
       </section>
 
       <section className="zone-overview" id="estancias">
-        <div className="section-kicker">CUATRO FORMAS DE HABITAR LA CIUDAD</div>
+        <div className="section-kicker">{t.zoneKicker}</div>
         <div className="zone-grid">
           {zoneDetails.map((zone, index) => {
             const Icon = zone.icon;
@@ -467,42 +669,46 @@ export default function HomePage() {
       <section className="properties-section" id="propiedades">
         <div className="section-heading">
           <div>
-            <p className="section-kicker">ESPACIOS SELECCIONADOS</p>
-            <h2>Encuentra tu próximo espacio</h2>
+            <p className="section-kicker">{t.propertyKicker}</p>
+            <h2>{t.propertyTitle}</h2>
           </div>
-          <p>
-            Elige una estancia mensual o reserva por pocos días para un evento,
-            una producción o una visita a la ciudad.
-          </p>
+          <p>{t.propertyIntro}</p>
         </div>
 
-        <div className="filter-row" role="tablist" aria-label="Filtrar por zona">
+        <div className="filter-row" role="tablist" aria-label={t.filterAria}>
           {(["Todas", "Xola", "Colones de Echegaray, Edo Mex", "Condesa", "Colonia del Valle"] as Zone[]).map(
             (zone) => (
               <button
                 key={zone}
-                aria-label={`Filtrar propiedades por ${zone}`}
+                aria-label={`${t.filterAria}: ${zone === "Todas" ? t.all : zone}`}
                 className={selectedZone === zone ? "active" : ""}
                 onClick={() => setSelectedZone(zone)}
               >
-                {zone}
+                {zone === "Todas" ? t.all : zone}
               </button>
             ),
           )}
           <div className="stay-toggle">
             <button
-              className={stayType === "Largo plazo" ? "active" : ""}
-              onClick={() => setStayType("Largo plazo")}
-              aria-pressed={stayType === "Largo plazo"}
+              className={stayType === "Estancia larga" ? "active" : ""}
+              onClick={() => setStayType("Estancia larga")}
+              aria-pressed={stayType === "Estancia larga"}
             >
-              Largo plazo
+              {t.longStay}
+            </button>
+            <button
+              className={stayType === "Estancia corta" ? "active" : ""}
+              onClick={() => setStayType("Estancia corta")}
+              aria-pressed={stayType === "Estancia corta"}
+            >
+              {t.shortStay}
             </button>
             <button
               className={stayType === "Por evento" ? "active" : ""}
               onClick={() => setStayType("Por evento")}
               aria-pressed={stayType === "Por evento"}
             >
-              Por evento
+              {t.eventStay}
             </button>
           </div>
         </div>
@@ -513,10 +719,10 @@ export default function HomePage() {
               <div className="property-image">
                 <img
                   src={property.image}
-                  alt={`${property.title} de MODO4 en ${property.zone}`}
+                  alt={`${property.title} ${t.selectedAlt} ${property.zone}`}
                 />
                 <span className="property-badge">{property.badge}</span>
-                <button aria-label={`Guardar ${property.title}`}>
+                <button aria-label={`${t.save} ${property.title}`}>
                   <Star size={18} />
                 </button>
               </div>
@@ -551,18 +757,18 @@ export default function HomePage() {
                 </div>
                 <div className="property-footer">
                   <div>
-                    <small>Desde</small>
+                    <small>{t.from}</small>
                     <strong>
-                      {stayType === "Largo plazo"
+                      {stayType === "Estancia larga"
                         ? property.monthly
                         : property.event}
                     </strong>
                   </div>
                   <button
                     onClick={() => openBooking(property)}
-                    aria-label={`Reservar ${property.title}`}
+                    aria-label={`${t.reserve} ${property.title}`}
                   >
-                    Reservar <ArrowRight size={16} />
+                    {t.reserve} <ArrowRight size={16} />
                   </button>
                 </div>
               </div>
@@ -573,57 +779,42 @@ export default function HomePage() {
 
       <section className="flexibility-section">
         <div className="flexibility-copy">
-          <p className="section-kicker">FLEXIBILIDAD REAL</p>
-          <h2>Un espacio para cada momento</h2>
-          <p>
-            Desde una habitación por varios meses hasta una oficina por un
-            lanzamiento: paga solo por el tiempo y los servicios que necesitas.
-          </p>
+          <p className="section-kicker">{t.flexibilityKicker}</p>
+          <h2>{t.flexibilityTitle}</h2>
+          <p>{t.flexibilityIntro}</p>
         </div>
         <div className="flexibility-cards">
           <article>
             <CalendarDays size={24} />
             <span>01</span>
-            <h3>Renta mensual</h3>
-            <p>
-              Contratos claros, servicios opcionales y atención durante toda tu
-              estancia.
-            </p>
+            <h3>{t.longCardTitle}</h3>
+            <p>{t.longCardText}</p>
           </article>
           <article>
             <Clock3 size={24} />
             <span>02</span>
-            <h3>Estancia por evento</h3>
-            <p>
-              Días flexibles para producciones, equipos, visitas o eventos
-              especiales.
-            </p>
+            <h3>{t.shortCardTitle}</h3>
+            <p>{t.shortCardText}</p>
           </article>
           <article>
             <ConciergeBell size={24} />
             <span>03</span>
-            <h3>Todo resuelto</h3>
-            <p>
-              Agrega limpieza, lavandería y compras a domicilio desde tu
-              reserva.
-            </p>
+            <h3>{t.eventCardTitle}</h3>
+            <p>{t.eventCardText}</p>
           </article>
         </div>
       </section>
 
       <section className="services-section" id="servicios">
         <div className="services-intro">
-          <p className="section-kicker">SERVICIOS A LA CARTA</p>
-          <h2>Tu tiempo vale más</h2>
-          <p>
-            Personaliza tu estancia y agrega servicios cuando los necesites. El
-            cargo aparece directamente en tu cuenta.
-          </p>
+          <p className="section-kicker">{t.servicesKicker}</p>
+          <h2>{t.servicesTitle}</h2>
+          <p>{t.servicesIntro}</p>
           <button
             className="text-link"
             onClick={() => setBookingOpen(true)}
           >
-            Armar mi estancia <ArrowRight size={17} />
+            {t.buildStay} <ArrowRight size={17} />
           </button>
         </div>
         <div className="service-list">
@@ -633,7 +824,7 @@ export default function HomePage() {
             <button
               key={service.id}
               aria-pressed={selectedServices.includes(service.id)}
-              aria-label={`${selectedServices.includes(service.id) ? "Quitar" : "Agregar"} ${service.title}`}
+              aria-label={`${selectedServices.includes(service.id) ? t.remove : t.add} ${service.title}`}
                 className={
                   selectedServices.includes(service.id)
                     ? "service-row selected"
@@ -665,18 +856,15 @@ export default function HomePage() {
       <section className="closing-section" id="nosotros">
         <div>
           <p className="section-kicker">MODO4</p>
-          <h2>Menos complicaciones.<br />Más ciudad.</h2>
+          <h2>{t.closingTitleA}<br />{t.closingTitleB}</h2>
         </div>
         <div>
-          <p>
-            Administramos espacios cuidados, conectados y listos para vivir o
-            trabajar. Tú eliges dónde, cuánto tiempo y qué necesitas.
-          </p>
+          <p>{t.closingText}</p>
           <button
             className="button button-primary"
             onClick={() => setBookingOpen(true)}
           >
-            Consultar disponibilidad <ArrowRight size={18} />
+            {t.availability} <ArrowRight size={18} />
           </button>
         </div>
       </section>
@@ -684,47 +872,45 @@ export default function HomePage() {
       <footer>
         <div className="footer-brand">MODO4</div>
         <div>
-          <strong>Explora</strong>
-          <a href="#propiedades">Propiedades</a>
-          <a href="#estancias">Estancias</a>
-          <a href="#servicios">Servicios</a>
+          <strong>{t.exploreFooter}</strong>
+          <a href="#propiedades">{t.navProperties}</a>
+          <a href="#estancias">{t.navStays}</a>
+          <a href="#servicios">{t.navServices}</a>
         </div>
         <div>
-          <strong>Zonas</strong>
+          <strong>{t.zonesFooter}</strong>
           <span>Colones de Echegaray, Edo Mex</span>
           <span>Xola</span>
           <span>Condesa</span>
           <span>Colonia del Valle</span>
         </div>
         <div>
-          <strong>Contacto</strong>
+          <strong>{t.contact}</strong>
           <a href="mailto:hola@modo4.mx">hola@modo4.mx</a>
           <span>+52 55 0000 4004</span>
-          <button aria-label="Contactar por WhatsApp">
+          <button aria-label={t.whatsapp}>
             <MessageCircle size={16} /> WhatsApp
           </button>
         </div>
-        <p className="copyright">
-          © 2026 MODO4. Mockup conceptual.
-        </p>
+        <p className="copyright">{t.copyright}</p>
       </footer>
 
       {bookingOpen && (
         <div className="drawer-layer" role="dialog" aria-modal="true">
           <button
             className="drawer-backdrop"
-            aria-label="Cerrar"
+            aria-label={t.close}
             onClick={() => setBookingOpen(false)}
           />
           <aside className="booking-drawer">
             <div className="drawer-head">
               <div>
-                <span>RESERVA FLEXIBLE</span>
-                <h2>Configura tu estancia</h2>
+                <span>{t.bookingKicker}</span>
+                <h2>{t.bookingTitle}</h2>
               </div>
               <button
                 onClick={() => setBookingOpen(false)}
-                aria-label="Cerrar reserva"
+                aria-label={t.closeBooking}
               >
                 <X size={22} />
               </button>
@@ -740,42 +926,49 @@ export default function HomePage() {
             </div>
 
             <div className="drawer-section">
-              <div className="drawer-label">MODALIDAD</div>
+              <div className="drawer-label">{t.mode}</div>
               <div className="drawer-toggle">
                 <button
-                  className={stayType === "Largo plazo" ? "active" : ""}
-                  onClick={() => setStayType("Largo plazo")}
-                  aria-pressed={stayType === "Largo plazo"}
+                  className={stayType === "Estancia larga" ? "active" : ""}
+                  onClick={() => setStayType("Estancia larga")}
+                  aria-pressed={stayType === "Estancia larga"}
                 >
-                  <CalendarDays size={17} /> Largo plazo
+                  <CalendarDays size={17} /> {t.longStay}
+                </button>
+                <button
+                  className={stayType === "Estancia corta" ? "active" : ""}
+                  onClick={() => setStayType("Estancia corta")}
+                  aria-pressed={stayType === "Estancia corta"}
+                >
+                  <CalendarDays size={17} /> {t.shortStay}
                 </button>
                 <button
                   className={stayType === "Por evento" ? "active" : ""}
                   onClick={() => setStayType("Por evento")}
                   aria-pressed={stayType === "Por evento"}
                 >
-                  <Clock3 size={17} /> Por evento
+                  <Clock3 size={17} /> {t.eventStay}
                 </button>
               </div>
             </div>
 
             <div className="drawer-section">
-              <div className="drawer-label">FECHAS</div>
+              <div className="drawer-label">{t.dates}</div>
               <div className="date-grid">
                 <label>
-                  <span>Entrada</span>
+                  <span>{t.start}</span>
                   <input
                     type="date"
-                    aria-label="Fecha de entrada"
+                    aria-label={t.start}
                     value={startDate}
                     onChange={(event) => setStartDate(event.target.value)}
                   />
                 </label>
                 <label>
-                  <span>Salida</span>
+                  <span>{t.end}</span>
                   <input
                     type="date"
-                    aria-label="Fecha de salida"
+                    aria-label={t.end}
                     value={endDate}
                     min={startDate}
                     onChange={(event) => setEndDate(event.target.value)}
@@ -785,7 +978,7 @@ export default function HomePage() {
             </div>
 
             <div className="drawer-section">
-              <div className="drawer-label">SERVICIOS EXTRA</div>
+              <div className="drawer-label">{t.extras}</div>
               <div className="drawer-services">
                 {services.map((service) => {
                   const Icon = service.icon;
@@ -794,7 +987,7 @@ export default function HomePage() {
                     <button
                       key={service.id}
                       aria-pressed={selected}
-                      aria-label={`${selected ? "Quitar" : "Agregar"} ${service.title}`}
+                      aria-label={`${selected ? t.remove : t.add} ${service.title}`}
                       className={selected ? "selected" : ""}
                       onClick={() => toggleService(service.id)}
                     >
@@ -813,27 +1006,25 @@ export default function HomePage() {
             <div className="price-summary">
               <div>
                 <span>
-                  {stayType === "Largo plazo"
-                    ? "Primer mes"
-                    : `Estancia estimada · ${dayCount} ${dayCount === 1 ? "día" : "días"}`}
+                  {stayType === "Estancia larga"
+                    ? t.firstMonth
+                    : `${t.estimatedStay} · ${dayCount} ${dayCount === 1 ? t.day : t.days}`}
                 </span>
                 <b>{formatMoney(basePrice)}</b>
               </div>
               <div>
-                <span>Servicios extra</span>
+                <span>{t.extraServices}</span>
                 <b>{formatMoney(servicesTotal)}</b>
               </div>
               <div className="price-total">
-                <span>Total estimado</span>
+                <span>{t.total}</span>
                 <strong>{formatMoney(basePrice + servicesTotal)}</strong>
               </div>
             </div>
             <button className="checkout-button" onClick={confirmBooking}>
-              Solicitar reserva <ArrowRight size={18} />
+              {t.requestBooking} <ArrowRight size={18} />
             </button>
-            <p className="drawer-note">
-              No se realizará ningún cargo hasta confirmar disponibilidad.
-            </p>
+            <p className="drawer-note">{t.noCharge}</p>
           </aside>
         </div>
       )}
