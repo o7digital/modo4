@@ -41,7 +41,7 @@ import { useMemo, useState } from "react";
 type Zone =
   | "Todas"
   | "Xola"
-  | "Colinas de Echegaray"
+  | "Colones de Echegaray, Edo Mex"
   | "Condesa"
   | "Colonia del Valle";
 type StayType = "Largo plazo" | "Por evento";
@@ -65,7 +65,7 @@ type Property = {
 const properties: Property[] = [
   {
     id: 1,
-    zone: "Colinas de Echegaray",
+    zone: "Colones de Echegaray, Edo Mex",
     title: "Casa Blanca · Habitación Terra",
     type: "Habitación privada",
     image: "/images/echegaray-house.png",
@@ -165,8 +165,8 @@ const zoneDetails = [
     icon: BriefcaseBusiness,
   },
   {
-    name: "Colinas de Echegaray",
-    short: "Colinas de Echegaray",
+    name: "Colones de Echegaray, Edo Mex",
+    short: "Colones de Echegaray, Edo Mex",
     type: "Casa blanca de tres pisos",
     note: "Habitaciones privadas, departamentos y cocina compartida",
     icon: House,
@@ -344,11 +344,11 @@ export default function HomePage() {
           </p>
           <h1>
             Vive, trabaja
-            <br />y quédate en CDMX
+            <br />entre CDMX y Edo Mex
           </h1>
           <p className="hero-subtitle">
             Rentas flexibles de habitaciones, departamentos y oficinas en
-            cuatro zonas estratégicas de la Ciudad de México.
+            tres zonas de CDMX y una ubicación en Edo Mex.
           </p>
           <div className="hero-actions">
             <a className="button button-primary" href="#propiedades">
@@ -393,7 +393,7 @@ export default function HomePage() {
             >
               <option>Todas</option>
               <option>Xola</option>
-              <option>Colinas de Echegaray</option>
+              <option>Colones de Echegaray, Edo Mex</option>
               <option>Condesa</option>
               <option>Colonia del Valle</option>
             </select>
@@ -477,7 +477,7 @@ export default function HomePage() {
         </div>
 
         <div className="filter-row" role="tablist" aria-label="Filtrar por zona">
-          {(["Todas", "Xola", "Colinas de Echegaray", "Condesa", "Colonia del Valle"] as Zone[]).map(
+          {(["Todas", "Xola", "Colones de Echegaray, Edo Mex", "Condesa", "Colonia del Valle"] as Zone[]).map(
             (zone) => (
               <button
                 key={zone}
@@ -691,7 +691,7 @@ export default function HomePage() {
         </div>
         <div>
           <strong>Zonas</strong>
-          <span>Colinas de Echegaray</span>
+          <span>Colones de Echegaray, Edo Mex</span>
           <span>Xola</span>
           <span>Condesa</span>
           <span>Colonia del Valle</span>
@@ -994,7 +994,7 @@ function AdminDashboard({ onClose }: { onClose: () => void }) {
               {[
                 ["Condesa", 94],
                 ["Colonia del Valle", 89],
-                ["Colinas de Echegaray", 86],
+                ["Colones de Echegaray, Edo Mex", 86],
                 ["Xola", 78],
               ].map(([zone, value]) => (
                 <div key={zone}>

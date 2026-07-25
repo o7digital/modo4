@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "MODO4 | Vive. Trabaja. Quédate.",
   description:
-    "Rentas flexibles en Xola, Colinas de Echegaray, Condesa y Colonia del Valle: oficinas, habitaciones y departamentos amueblados.",
+    "Rentas flexibles en Xola, Colones de Echegaray, Edo Mex, Condesa y Colonia del Valle: oficinas, habitaciones y departamentos amueblados.",
   applicationName: "MODO4",
   keywords: [
     "MODO4",
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
     "rentas flexibles CDMX",
     "oficinas Xola",
     "departamentos amueblados Condesa",
-    "Colinas de Echegaray",
+    "Colones de Echegaray, Edo Mex",
     "Colonia del Valle",
   ],
   openGraph: {
     title: "MODO4 | Vive. Trabaja. Quédate.",
     description:
-      "Espacios premium para vivir, trabajar o quedarse por temporada en cuatro zonas de la Ciudad de México.",
+      "Espacios premium para vivir, trabajar o quedarse por temporada en CDMX y Edo Mex.",
     siteName: "MODO4",
     locale: "es_MX",
     type: "website",
